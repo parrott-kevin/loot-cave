@@ -15,14 +15,14 @@
     };
 
     vm.getUser = function() {
-      $http.get('/api/searchDestinyPlayer', {
+      $http.get('/api/getAccount', {
         params: {
           platform: vm.user.platform,
           name: vm.user.name
         }
       }).success(function(d){
         console.log(d);
-        vm.characters = d[0].characters;
+        vm.characters = d.accountInfo.data.characters;
       });
     };
   }
