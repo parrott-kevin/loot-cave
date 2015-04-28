@@ -6,7 +6,6 @@ var bungieEndpoints = require('../services/bungieEndpoints');
 
 var account = {
   get: function(req, res) {
-    var bungieUrl = 'https://www.bungie.net/Platform/Destiny';
     var membershipType = req.query.platform;
     var displayName = req.query.name;
     async.waterfall([
@@ -18,8 +17,8 @@ var account = {
         });
       },
       function(membershipId, callback) {
-        var endpoint = '/' + membershipType + '/Account/' + membershipId + '/?definitions=true';
-        request(bungieUrl + endpoint, function(error, response, body) {
+        var endpoint = bungieEndpoints.getAccount(membershipType, membershipId, true);
+        request(endpoint, function(error, response, body) {
           body = JSON.parse(body).Response;
           var accountInfo = {
             data: body.data,
@@ -33,8 +32,8 @@ var account = {
         var characterInventory = {};
         async.each(characterIdArray, function(character, cb) {
           var characterId = character.characterBase.characterId;
-          var endPoint = '/' + membershipType + '/Account/' + membershipId + '/character/' + characterId + '/inventory';
-          request(bungieUrl + endPoint, function (error, response, body) {
+          var endpoint = bungieEndpoints.getCharacterInventory(membershipType, membershipId, characterId, true);
+          request(endpoint, function (error, response, body) {
             characterInventory[characterId] = JSON.parse(body).Response.data;
             cb();
           });
