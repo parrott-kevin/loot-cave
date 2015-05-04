@@ -4,7 +4,11 @@
   angular
     .module('app', [
       'ngRoute',
-      'user.controller',
-      'fetch-account.factory'
+      'search.controller',
+      'account.controller',
+      'lodash.factory',
+      'fetch-account.factory',
+      'definition-match.factory',
+      'inventory.factory'
     ]);
 })();
