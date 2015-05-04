@@ -4,7 +4,9 @@
   angular
     .module('app', [
       'ngRoute',
-      'user.controller',
+      'search.controller',
+      'account.controller',
+      'lodash.factory',
       'fetch-account.factory'
     ]);
 })();

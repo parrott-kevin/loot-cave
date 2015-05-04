@@ -12,11 +12,11 @@
       get: get
     };
 
-    function get(user) {
+    function get(platform, name) {
       return $http.get('/api/getAccount', {
         params: {
-          platform: user.platform,
-          name: user.name
+          platform: platform,
+          name: name
         }
       }).success(function(data){
         return data;
