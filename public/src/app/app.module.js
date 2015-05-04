@@ -4,6 +4,7 @@
   angular
     .module('app', [
       'ngRoute',
-      'user.controller'
+      'user.controller',
+      'fetch-account.factory'
     ]);
 })();

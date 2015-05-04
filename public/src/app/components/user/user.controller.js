@@ -5,25 +5,23 @@
     .module('user.controller', ['ui.bootstrap'])
     .controller('UserController', UserController);
 
-  UserController.$inject = ['$http'];
+  UserController.$inject = ['fetchAccount'];
 
-  function UserController($http) {
+  function UserController(fetchAccount) {
     var vm = this;
     vm.bungie = 'https://www.bungie.net';
     vm.user = {
       platform: 1
     };
 
-    vm.getUser = function() {
-      $http.get('/api/getAccount', {
-        params: {
-          platform: vm.user.platform,
-          name: vm.user.name
-        }
-      }).success(function(d){
-        console.log(d);
-        vm.characters = d.accountInfo.data.characters;
+    vm.getAccount = function(user) {
+      fetchAccount.get(user).then(function (d) {
+        console.log(d.data);
+        vm.characters = d.data.data.characters;
       });
     };
+
+    //todo: hash lookup in a service
+
   }
 })();

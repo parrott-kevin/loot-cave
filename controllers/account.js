@@ -34,7 +34,7 @@ var account = {
           var characterId = character.characterBase.characterId;
           var endpoint = bungieEndpoints.getCharacterInventory(membershipType, membershipId, characterId, true);
           request(endpoint, function (error, response, body) {
-            characterInventory[characterId] = JSON.parse(body).Response.data;
+            characterInventory[characterId] = JSON.parse(body).Response;
             cb();
           });
         }, function() {
@@ -42,11 +42,11 @@ var account = {
         });
       }
     ], function(err, accountInfo, characterInventory) {
-      var data = {
-        accountInfo: accountInfo,
-        characterInventory: characterInventory
-      };
-      res.send(data);
+      accountInfo.data.characters.map(function(val) {
+        val.characterBase.inventory = characterInventory[val.characterBase.characterId];
+      });
+
+      res.send(accountInfo);
     });
   }
 };
