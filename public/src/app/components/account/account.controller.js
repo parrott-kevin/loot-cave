@@ -17,13 +17,5 @@
       var def = definitionMatch.get(key, hash, definitions);
       return vm.bungie + def.icon;
     };
-
-    //todo: add watcher to $routeChangeStart and $routeChangeSuccess so that loading icon appears until resolvers are finished.
-    //$scope.$on('$routeChangeStart', function() {
-    //  console.log('start');
-    //});
-    //$scope.$on('$routeChangeSuccess', function() {
-    //  console.log('success');
-    //});
   }
 })();
