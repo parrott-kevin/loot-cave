@@ -12,8 +12,13 @@ var account = {
       function(callback) {
         var endpoint = bungieEndpoints.searchDestinyPlayer(membershipType, displayName);
         request(endpoint, function(error, response, body) {
-          var membershipId = JSON.parse(body).Response[0].membershipId;
-          callback(null, membershipId);
+          body = JSON.parse(body);
+          if (body.ErrorCode === 1 && response.statusCode === 200) {
+            var membershipId = body.Response[0].membershipId;
+            callback(null, membershipId);
+          } else {
+            res.send([response, body.ErrorCode, body.Message]);
+          }
         });
       },
       function(membershipId, callback) {

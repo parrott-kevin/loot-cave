@@ -18,7 +18,7 @@
           platform: platform,
           name: name
         }
-      }).success(function(data){
+      }).success(function(data) {
         return data;
       });
     }

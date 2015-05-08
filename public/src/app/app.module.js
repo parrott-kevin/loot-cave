@@ -9,6 +9,6 @@
       'lodash.factory',
       'fetch-account.factory',
       'definition-match.factory',
-      'inventory.factory'
+      'equipped.factory'
     ]);
 })();
