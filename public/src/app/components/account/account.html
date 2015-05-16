@@ -8,20 +8,28 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" ng-repeat="equipment in vm.equipped[character.characterBase.characterId]">
-          <div class="media">
-            <div class="media-left">
-              <img class="media-object" ng-click="equipment.isCollapsed = !equipment.isCollapsed" ng-src="{{vm.bungie + equipment.items[0].itemDefinition.icon}}" alt="{{equipment.items[0].itemDefinition.itemName}}">
+        <div class="col-md-12" ng-repeat="(key, item) in character.characterBase.inventory">
+            <div class="media">
+              <div class="media-left">
+                <img class="media-object inventory-thumbnail" ng-click="item.isCollapsed = !item.isCollapsed" ng-src="{{vm.bungie + item.itemDefinition.icon}}" alt="{{equipment.itemDefinition.itemName}}">
+              </div>
+              <div class="media-body">
+                <div class="media-heading">
+                  {{item.itemDefinition.itemName}}
+                </div>
+              </div>
             </div>
-            <div class="media-body">
-              <span class="media-heading">{{equipment.items[0].itemDefinition.itemName}}</span>
+            <div collapse="item.isCollapsed">
+              <div class="well">
+                <div>
+                  <small>
+                    <em>
+                      {{item.itemDefinition.itemDescription}}
+                    </em>
+                  </small>
+                </div>
+              </div>
             </div>
-          </div>
-          <div collapse="equipment.isCollapsed">
-            <div class="well">
-              Test
-            </div>
-          </div>
         </div>
       </div>
     </div>

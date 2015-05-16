@@ -2,7 +2,9 @@
 
 var async = require('async');
 var request = require('request');
+var _ = require('lodash');
 var bungieEndpoints = require('../services/bungieEndpoints');
+var config = require('../config/config');
 
 var account = {
   get: function(req, res) {
@@ -10,20 +12,31 @@ var account = {
     var displayName = req.query.name;
     async.waterfall([
       function(callback) {
-        var endpoint = bungieEndpoints.searchDestinyPlayer(membershipType, displayName);
-        request(endpoint, function(error, response, body) {
+        var options = {
+          url: bungieEndpoints.searchDestinyPlayer(membershipType, displayName),
+          headers: {
+            'X-API-KEY': config.bungieApiKey
+          }
+        };
+        request(options, function(error, response, body) {
           body = JSON.parse(body);
-          if (body.ErrorCode === 1 && response.statusCode === 200) {
+          if (body.ErrorCode === 1 && response.statusCode === 200 && !_.isUndefined(body.Response[0])) {
             var membershipId = body.Response[0].membershipId;
             callback(null, membershipId);
+          } else if (_.isUndefined(body.Response[0])) {
+            res.status('404').send();
           } else {
             res.send([response, body.ErrorCode, body.Message]);
           }
         });
       },
       function(membershipId, callback) {
-        var endpoint = bungieEndpoints.getAccount(membershipType, membershipId, true);
-        request(endpoint, function(error, response, body) {
+        var options = {
+          url: bungieEndpoints.getAccount(membershipType, membershipId, true),
+          headers: {
+            'X-API-KEY': config.bungieApiKey}
+        };
+        request(options, function(error, response, body) {
           body = JSON.parse(body).Response;
           var accountInfo = {
             data: body.data,
@@ -37,8 +50,13 @@ var account = {
         var characterInventory = {};
         async.each(characterIdArray, function(character, cb) {
           var characterId = character.characterBase.characterId;
-          var endpoint = bungieEndpoints.getCharacterInventory(membershipType, membershipId, characterId, true);
-          request(endpoint, function (error, response, body) {
+          var options =  {
+            url: bungieEndpoints.getCharacterInventory(membershipType, membershipId, characterId, true),
+            headers: {
+              'X-API-KEY': config.bungieApiKey
+            }
+          };
+          request(options, function (error, response, body) {
             characterInventory[characterId] = JSON.parse(body).Response;
             cb();
           });

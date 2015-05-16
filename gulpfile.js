@@ -87,7 +87,7 @@ gulp.task('compress:lib', function() {
 // Watch for javascript and less changes
 gulp.task('watch', function() {
   gulp.watch('./public/src/app/**/*.js', ['compress:js']);
-  gulp.watch('./public/src/assets/less/styles.less', ['less:css', 'compress:css']);
+  gulp.watch('./public/src/assets/less/*.less', ['less:css', 'compress:css']);
   gulp.watch('./public/src/**/*.html', ['copy:html']);
 });
 

@@ -8,59 +8,34 @@
   definitionMatch.$inject = ['_'];
 
   function definitionMatch(_) {
-    //var hashToDef = {
-    //  bucketHash: 'buckets',
-    //  flagHash: 'flags',
-    //  itemHash: 'items',
-    //  perkHash: 'perks',
-    //  talentGridHash: 'talentGrids'
-    //};
 
     return {
       get: get
     };
 
     function get(obj, definitions) {
-
-      hashes(obj).forEach(function(val) {
+      hashes(obj, _.keysIn(definitions)).forEach(function(val) {
         obj[val.itemDefKey] = _.get(definitions, [val.hashDefKey, val.hashValue]);
       });
 
       return obj;
-
-      //var hashDef = objHashes.map(function(val) {
-      //  return val.slice(0, -4) + 's';
-      //});
-      //var keys = _.intersection(hashDef, _.keysIn(definitions));
-      //
-      //
-      //keys.forEach(function(val) {
-      //  var key = val.slice(0, -1) + 'Definition';
-      //  console.log(val);
-      //  obj[key] = definitions[val];
-      //});
-      //console.log(obj);
-
-      //return _.get(definitions, [hashToDef[key], obj[key]]);
     }
 
-    function hashes(obj) {
+    function hashes(obj, defKeys) {
       var hash = [];
       _.keysIn(obj).forEach(function(val) {
-        if (_.endsWith(val, 'Hash')) {
-          hash.push(val);
+        if (_.endsWith(val, 'Hash') && _.includes(defKeys, val.slice(0, -4) + 's')) {
+          hash.push(
+            {
+              hash: val,
+              hashValue: obj[val],
+              hashDefKey: val.slice(0, -4) + 's',
+              itemDefKey: val.slice(0, -4) + 'Definition'
+            }
+          );
         }
       });
-
-      return hash.map(function(val) {
-        return {
-          hash: val,
-          hashValue: obj[val],
-          hashDefKey: val.slice(0, -4) + 's',
-          itemDefKey: val.slice(0, -4) + 'Definition'
-        };
-      });
-
+      return hash;
     }
 
 
