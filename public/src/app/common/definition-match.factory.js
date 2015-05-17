@@ -24,18 +24,26 @@
     function hashes(obj, defKeys) {
       var hash = [];
       _.keysIn(obj).forEach(function(val) {
-        if (_.endsWith(val, 'Hash') && _.includes(defKeys, val.slice(0, -4) + 's')) {
+        if (_.endsWith(val, 'Hash') && _.includes(defKeys, hashDefKey(val))) {
           hash.push(
             {
               hash: val,
               hashValue: obj[val],
-              hashDefKey: val.slice(0, -4) + 's',
+              hashDefKey: hashDefKey(val),
               itemDefKey: val.slice(0, -4) + 'Definition'
             }
           );
         }
       });
       return hash;
+    }
+
+    function hashDefKey (val) {
+      var plural = 's';
+      if (val === 'classHash') {
+        plural = 'es';
+      }
+      return val.slice(0, -4) + plural;
     }
 
 

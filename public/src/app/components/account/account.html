@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" ng-repeat="(key, item) in character.characterBase.inventory">
+        <div class="col-md-12" ng-repeat="item in character.characterBase.inventory">
             <div class="media">
               <div class="media-left">
                 <img class="media-object inventory-thumbnail" ng-click="item.isCollapsed = !item.isCollapsed" ng-src="{{vm.bungie + item.itemDefinition.icon}}" alt="{{equipment.itemDefinition.itemName}}">

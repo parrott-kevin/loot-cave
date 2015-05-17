@@ -12,69 +12,40 @@
     };
 
     function get(items, definitions) {
-    //  return build(items, definitions);
-    //}
-    //
-    //function build(items, definitions) {
-      var equippedItems = {};
+      var equippedItems = [];
       // match items to those wanted
       items.forEach(function(item) {
         item = definitionMatch.get(item, definitions);
-        item.items[0].isCollapsed = true;
         var bucket = item.bucketDefinition.bucketIdentifier;
-        switch (bucket) {
-          case 'BUCKET_BUILD':
-            equippedItems.subClass = item;
-            break;
-          case 'BUCKET_PRIMARY_WEAPON':
-            equippedItems.primary = item; // build(item.items[0], definitions);
-            break;
-          case 'BUCKET_SPECIAL_WEAPON':
-            equippedItems.special = item;
-            break;
-          case 'BUCKET_HEAVY_WEAPON':
-            equippedItems.heavy = item;
-            break;
-          case 'BUCKET_HEAD':
-            equippedItems.head = item;
-            break;
-          case'BUCKET_ARMS':
-            equippedItems.arms = item;
-            break;
-          case 'BUCKET_CHEST':
-            equippedItems.chest = item;
-            break;
-          case 'BUCKET_LEGS':
-            equippedItems.legs = item;
-            break;
-          case 'BUCKET_CLASS_ITEMS':
-            equippedItems.classItem = item;
-            break;
-          case 'BUCKET_GHOST':
-            equippedItems.ghost = item;
-            break;
-          case 'BUCKET_VEHICLE':
-            equippedItems.vehicle = item;
-            break;
-          case 'BUCKET_SHIP':
-            equippedItems.ship = item;
-            break;
-          case 'BUCKET_SHADER':
-            equippedItems.shader = item;
-            break;
-          case 'BUCKET_EMBLEM':
-            equippedItems.emblem = item;
-            break;
-        }
-      });
-
-      _.keysIn(equippedItems).forEach(function(item) {
-        if (item === 'subClass') {
-          equippedItems[item] = definitionMatch.get(equippedItems[item].items[0], definitions);
+        var itemDef = {};
+        if (bucket === 'BUCKET_BUILD') {
+          itemDef = definitionMatch.get(item.items[0], definitions);
         } else {
-            equippedItems[item] = build(equippedItems[item].items[0], definitions);
+          itemDef = build(item.items[0], definitions);
         }
-        equippedItems[item].isCollapsed = true;
+        itemDef.bucket = bucket;
+        itemDef.isCollapsed = true;
+        equippedItems.push(itemDef);
+      });
+      var itemOrder = [
+        'BUCKET_BUILD',
+        'BUCKET_PRIMARY_WEAPON',
+        'BUCKET_SPECIAL_WEAPON',
+        'BUCKET_HEAVY_WEAPON',
+        'BUCKET_HEAD',
+        'BUCKET_ARMS',
+        'BUCKET_CHEST',
+        'BUCKET_LEGS',
+        'BUCKET_CLASS_ITEMS',
+        'BUCKET_GHOST',
+        'BUCKET_VEHICLE',
+        'BUCKET_SHIP',
+        'BUCKET_SHADER',
+        'BUCKET_EMBLEM'
+      ];
+
+      equippedItems = _.sortBy(equippedItems, function(item) {
+        return itemOrder.indexOf(item.bucket);
       });
 
       return equippedItems;
