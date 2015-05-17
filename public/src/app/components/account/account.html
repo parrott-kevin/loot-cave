@@ -146,6 +146,15 @@
             </div>
           </div>
         </div>
+
+        <!--Misc-->
+        <h4 class="col-md-12">Misc</h4>
+        <div class="col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
+          <img class="inventory-thumbnail img-responsive" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
+          <div>
+            {{item.itemHashDefinition.itemName}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
