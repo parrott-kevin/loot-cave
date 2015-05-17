@@ -14,36 +14,63 @@
     };
 
     function get(obj, definitions) {
-      hashes(obj, _.keysIn(definitions)).forEach(function(val) {
-        obj[val.itemDefKey] = _.get(definitions, [val.hashDefKey, val.hashValue]);
-      });
 
-      return obj;
-    }
+      var hashDefinitions = [
+        {
+          hash: 'bucketHash',
+          def: 'buckets'
+        },
+        {
+          hash: 'buildStatGroupHash',
+          def: 'statGroups'
+        },
+        {
+          hash: 'classHash',
+          def: 'classes'
+        },
+        {
+          hash: 'genderHash',
+          def: 'genders'
+        },
+        {
+          hash: 'itemHash',
+          def: 'items'
+        },
+        {
+          hash: 'perkHash',
+          def: 'perks'
+        },
+        {
+          hash: 'progressionHash',
+          def: 'progressions'
+        },
+        {
+          hash: 'raceHash',
+          def: 'races'
+        },
+        {
+          hash: 'statGroupHash',
+          def: 'statGroups'
+        },
+        {
+          hash: 'statHash',
+          def: 'stats'
+        },
 
-    function hashes(obj, defKeys) {
-      var hash = [];
-      _.keysIn(obj).forEach(function(val) {
-        if (_.endsWith(val, 'Hash') && _.includes(defKeys, hashDefKey(val))) {
-          hash.push(
-            {
-              hash: val,
-              hashValue: obj[val],
-              hashDefKey: hashDefKey(val),
-              itemDefKey: val.slice(0, -4) + 'Definition'
-            }
-          );
+        {
+          hash: 'talentGridHash',
+          def: 'talentGrids'
+        }
+      ];
+
+      var objKeys = _.keysIn(obj);
+      objKeys.forEach(function(val) {
+        var mapping = _.find(hashDefinitions, {hash: val});
+        if (mapping) {
+          obj[val + 'Definition'] = _.get(definitions, [mapping.def, obj[val]]);
         }
       });
-      return hash;
-    }
-
-    function hashDefKey (val) {
-      var plural = 's';
-      if (val === 'classHash') {
-        plural = 'es';
-      }
-      return val.slice(0, -4) + plural;
+      return obj;
     }
 
 

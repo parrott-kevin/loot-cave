@@ -11,11 +11,11 @@
         <div class="col-md-12" ng-repeat="item in character.characterBase.inventory">
             <div class="media">
               <div class="media-left">
-                <img class="media-object inventory-thumbnail" ng-click="item.isCollapsed = !item.isCollapsed" ng-src="{{vm.bungie + item.itemDefinition.icon}}" alt="{{equipment.itemDefinition.itemName}}">
+                <img class="media-object inventory-thumbnail" ng-click="item.isCollapsed = !item.isCollapsed" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{equipment.itemHashDefinition.itemName}}">
               </div>
               <div class="media-body">
                 <div class="media-heading">
-                  {{item.itemDefinition.itemName}}
+                  {{item.itemHashDefinition.itemName}}
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
                 <div>
                   <small>
                     <em>
-                      {{item.itemDefinition.itemDescription}}
+                      {{item.itemHashDefinition.itemDescription}}
                     </em>
                   </small>
                 </div>

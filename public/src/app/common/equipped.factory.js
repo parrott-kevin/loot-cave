@@ -16,7 +16,8 @@
       // match items to those wanted
       items.forEach(function(item) {
         item = definitionMatch.get(item, definitions);
-        var bucket = item.bucketDefinition.bucketIdentifier;
+        //var bucket = item.bucketDefinition.bucketIdentifier;
+        var bucket = item.bucketHashDefinition.bucketIdentifier;
         var itemDef = {};
         if (bucket === 'BUCKET_BUILD') {
           itemDef = definitionMatch.get(item.items[0], definitions);
@@ -47,7 +48,6 @@
       equippedItems = _.sortBy(equippedItems, function(item) {
         return itemOrder.indexOf(item.bucket);
       });
-
       return equippedItems;
     }
 

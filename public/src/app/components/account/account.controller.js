@@ -8,7 +8,6 @@
   AccountController.$inject = ['accountResolver', 'equipped', 'definitionMatch'];
   function AccountController(accountResolver, equipped, definitionMatch) {
     var vm = this;
-    console.log(accountResolver);
     vm.bungie = 'https://www.bungie.net';
     vm.characters = accountResolver.data.characters;
     vm.characters.forEach(function(character) {
