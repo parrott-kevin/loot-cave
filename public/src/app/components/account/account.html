@@ -2,34 +2,149 @@
   <div class="row">
     <div class="col-md-4" ng-repeat="character in vm.characters">
       <div class="row">
-        <div class="col-md-12" style="background: transparent url({{vm.bungie + character.backgroundPath}}) no-repeat;">
-          <img class="img-responsive col-md-4" ng-src="{{vm.bungie + character.emblemPath}}">
-          <h1 class="col-md-4 col-md-offset-4" style="color: white;">{{character.characterLevel}}</h1>
+        <div class="col-md-12" style="background: url({{vm.bungie + character.backgroundPath}}) transparent no-repeat;">
+          <div class="row">
+            <div class="col-md-5">
+              <img class="img-responsive" ng-src="{{vm.bungie + character.emblemPath}}">
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-3">
+                  <h2 style="color: white;">{{character.characterLevel}}</h2>
+                </div>
+                <div class="col-md-9">
+                  <h2 style="color: white;">{{character.characterBase.classHashDefinition.className}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" ng-repeat="item in character.characterBase.inventory">
-            <div class="media">
-              <div class="media-left">
-                <img class="media-object inventory-thumbnail" ng-click="item.isCollapsed = !item.isCollapsed" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{equipment.itemHashDefinition.itemName}}">
+
+        <!--SubClass information-->
+        <div class="col-md-12" ng-repeat="subClass in character.characterBase.inventory.subClass">
+
+          <div class="media">
+            <div class="media-left">
+              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': subClass.isGridComplete}"
+                   ng-click="subClass.isCollapsed = !subClass.isCollapsed"
+                   ng-src="{{vm.bungie + subClass.itemHashDefinition.icon}}" alt="{{subClass.itemHashDefinition.itemName}}">
+            </div>
+
+            <div class="media-body">
+              <h5 class="media-heading">
+                {{subClass.itemHashDefinition.itemName}}
+              </h5>
+            </div>
+          </div>
+
+          <div collapse="subClass.isCollapsed">
+            <div class="well">
+              <small>
+                <em>
+                  {{subClass.itemHashDefinition.itemDescription}}
+                </em>
+              </small>
+            </div>
+          </div>
+
+        </div>
+
+        <!--Weapons-->
+        <h4 class="col-md-12">Weapons</h4>
+        <div class="col-md-12" ng-repeat="weapon in character.characterBase.inventory.weapons">
+
+          <div class="media">
+            <div class="media-left" >
+              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': weapon.isGridComplete}"
+                   ng-click="weapon.isCollapsed = !weapon.isCollapsed"
+                   ng-src="{{vm.bungie + weapon.itemHashDefinition.icon}}" alt="{{weapon.itemHashDefinition.itemName}}">
+            </div>
+
+            <div class="media-body">
+              <h5 class="media-heading">
+                  {{weapon.itemHashDefinition.itemName}}
+              </h5>
+              <div>
+                <em>{{weapon.primaryStat.statHashDefinition.statName}}</em>
+                {{weapon.primaryStat.value}}
               </div>
-              <div class="media-body">
-                <div class="media-heading">
-                  {{item.itemHashDefinition.itemName}}
+            </div>
+
+          </div>
+
+          <div collapse="weapon.isCollapsed">
+            <div class="well">
+              <div>
+                <small>
+                  <em>
+                    {{weapon.itemHashDefinition.itemDescription}}
+                  </em>
+                </small>
+              </div>
+
+              <div>
+                <div ng-repeat="stat in weapon.stats">
+                  <div>
+                    {{stat.statHashDefinition.statName}}
+                  </div>
+                    <span ng-if="stat.statHashDefinition.statName === 'Magazine'">
+                      <progressbar value="stat.value" max="stat.value">
+                        <em>{{stat.value}}</em>
+                      </progressbar>
+                    </span>
+                    <span ng-if="stat.statHashDefinition.statName !== 'Magazine'">
+                      <progressbar value="stat.value">
+                        <em>{{stat.value}}</em>
+                      </progressbar>
+                    </span>
                 </div>
               </div>
             </div>
-            <div collapse="item.isCollapsed">
-              <div class="well">
+          </div>
+
+        </div>
+
+        <!--Armor-->
+        <h4 class="col-md-12">Armor</h4>
+        <div class="col-md-12" ng-repeat="armor in character.characterBase.inventory.armor">
+          <div class="media">
+            <div class="media-left">
+              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': armor.isGridComplete}"
+                   ng-click="armor.isCollapsed = !armor.isCollapsed"
+                   ng-src="{{vm.bungie + armor.itemHashDefinition.icon}}" alt="{{armor.itemHashDefinition.itemName}}">
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">
+                {{armor.itemHashDefinition.itemName}}
+              </h5>
+              <div>
                 <div>
-                  <small>
-                    <em>
-                      {{item.itemHashDefinition.itemDescription}}
-                    </em>
-                  </small>
+                  <em>{{armor.primaryStat.statHashDefinition.statName}}</em>
+                  {{armor.primaryStat.value}}
+                </div>
+                <div ng-repeat="stat in armor.stats">
+                  <span ng-if="stat.value > 0">
+                    <em>{{stat.statHashDefinition.statName}}</em>
+                    {{stat.value}}
+                  </span>
                 </div>
               </div>
             </div>
+          </div>
+          <div collapse="armor.isCollapsed">
+            <div class="well">
+              <div>
+                <small>
+                  <em>
+                    {{armor.itemHashDefinition.itemDescription}}
+                  </em>
+                </small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

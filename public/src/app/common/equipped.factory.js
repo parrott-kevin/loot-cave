@@ -12,11 +12,37 @@
     };
 
     function get(items, definitions) {
-      var equippedItems = [];
-      // match items to those wanted
+      var equippedItems = {
+        subClass: [],
+        weapons: [],
+        armor: [],
+        misc: []
+      };
+
+      var itemOrderWeapons = [
+        'BUCKET_PRIMARY_WEAPON',
+        'BUCKET_SPECIAL_WEAPON',
+        'BUCKET_HEAVY_WEAPON'
+      ];
+
+      var itemOrderArmor = [
+        'BUCKET_HEAD',
+        'BUCKET_ARMS',
+        'BUCKET_CHEST',
+        'BUCKET_LEGS'
+      ];
+
+      var itemOrderMisc = [
+        'BUCKET_CLASS_ITEMS',
+        'BUCKET_GHOST',
+        'BUCKET_VEHICLE',
+        'BUCKET_SHIP',
+        'BUCKET_SHADER',
+        'BUCKET_EMBLEM'
+      ];
+
       items.forEach(function(item) {
         item = definitionMatch.get(item, definitions);
-        //var bucket = item.bucketDefinition.bucketIdentifier;
         var bucket = item.bucketHashDefinition.bucketIdentifier;
         var itemDef = {};
         if (bucket === 'BUCKET_BUILD') {
@@ -26,28 +52,21 @@
         }
         itemDef.bucket = bucket;
         itemDef.isCollapsed = true;
-        equippedItems.push(itemDef);
+        if (bucket === 'BUCKET_BUILD') {
+          equippedItems.subClass.push(itemDef);
+        } else if (_.includes(itemOrderWeapons, bucket)) {
+          equippedItems.weapons.push(itemDef);
+        } else if (_.includes(itemOrderArmor, bucket)) {
+          equippedItems.armor.push(itemDef);
+        } else if (_.includes(itemOrderMisc, bucket)) {
+          equippedItems.misc.push(itemDef);
+        }
       });
-      var itemOrder = [
-        'BUCKET_BUILD',
-        'BUCKET_PRIMARY_WEAPON',
-        'BUCKET_SPECIAL_WEAPON',
-        'BUCKET_HEAVY_WEAPON',
-        'BUCKET_HEAD',
-        'BUCKET_ARMS',
-        'BUCKET_CHEST',
-        'BUCKET_LEGS',
-        'BUCKET_CLASS_ITEMS',
-        'BUCKET_GHOST',
-        'BUCKET_VEHICLE',
-        'BUCKET_SHIP',
-        'BUCKET_SHADER',
-        'BUCKET_EMBLEM'
-      ];
 
-      equippedItems = _.sortBy(equippedItems, function(item) {
-        return itemOrder.indexOf(item.bucket);
-      });
+
+      //equippedItems = _.sortBy(equippedItems, function(item) {
+      //  return itemOrder.indexOf(item.bucket);
+      //});
       return equippedItems;
     }
 
