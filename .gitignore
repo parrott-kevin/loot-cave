@@ -3,5 +3,5 @@ node_modules
 .DS_*
 public/dist
 public/src/lib
-#*.log
+*.log
 config/config.js
