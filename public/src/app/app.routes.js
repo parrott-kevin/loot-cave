@@ -8,6 +8,11 @@
   routeConfig.$inject = ['$routeProvider'];
   function routeConfig($routeProvider) {
     $routeProvider
+      .when('/', {
+        templateUrl: 'app/components/search/search.html',
+        controller: 'SearchController',
+        controllerAs: 'vm'
+      })
       .when('/home', {
         templateUrl: 'app/components/search/search.html',
         controller: 'SearchController',
