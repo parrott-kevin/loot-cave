@@ -10,6 +10,20 @@ var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 
 //---------------------------------------------------------------------------//
+// Tasks for running live/beta
+//---------------------------------------------------------------------------//
+
+gulp.task('build', [
+  'clean:dist',
+  'compress:css',
+  'copy:fonts',
+  'copy:html',
+  'compress:js',
+  'compress:lib'
+], function() {});
+
+
+//---------------------------------------------------------------------------//
 // Tasks for running dev
 //---------------------------------------------------------------------------//
 
