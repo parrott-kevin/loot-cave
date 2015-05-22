@@ -4,8 +4,7 @@ var async = require('async');
 var request = require('request');
 var _ = require('lodash');
 var bungieEndpoints = require('../services/bungieEndpoints');
-var config = require('../config/config.json');
-var bungieApiKey = process.env.bungieApiKey || config.bungieApiKey;
+var config = require('../config/config.json') || process.env;
 
 var account = {
   get: function(req, res) {
@@ -16,7 +15,7 @@ var account = {
         var options = {
           url: bungieEndpoints.searchDestinyPlayer(membershipType, displayName),
           headers: {
-            'X-API-KEY': bungieApiKey
+            'X-API-KEY': config.bungieApiKey
           }
         };
         request(options, function(error, response, body) {
@@ -35,7 +34,7 @@ var account = {
         var options = {
           url: bungieEndpoints.getAccount(membershipType, membershipId, true),
           headers: {
-            'X-API-KEY': bungieApiKey}
+            'X-API-KEY': config.bungieApiKey}
         };
         request(options, function(error, response, body) {
           body = JSON.parse(body).Response;
@@ -54,7 +53,7 @@ var account = {
           var options =  {
             url: bungieEndpoints.getCharacterInventory(membershipType, membershipId, characterId, true),
             headers: {
-              'X-API-KEY': bungieApiKey
+              'X-API-KEY': config.bungieApiKey
             }
           };
           request(options, function (error, response, body) {
