@@ -4,4 +4,4 @@ node_modules
 public/dist
 public/src/lib
 *.log
-config/config.js
+config/config.json

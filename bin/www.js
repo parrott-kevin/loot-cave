@@ -1,7 +1,7 @@
 'use strict';
 
 var app = require('../app');
-var config = require('../config/config');
+var config = require('../config/config.json')[process.env.NODE_ENV];
 
 app.set('port', process.env.PORT || config.port);
 
