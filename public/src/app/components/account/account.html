@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row">
+    <div class="text-center">
+      {{vm.account.inventory.currencies[0].itemHashDefinition.itemName}}: {{vm.account.inventory.currencies[0].value}}
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-4" ng-repeat="character in vm.characters">
+      <!--Character Headers-->
       <div class="row">
         <div class="col-md-12" style="background: url({{vm.bungie + character.backgroundPath}}) transparent no-repeat;">
           <div class="row">
@@ -18,14 +24,14 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
+
+      <!--Inventory-->
       <div class="row">
-
-        <!--SubClass information-->
+        <!--SubClass-->
+        <h4 class="col-md-12">SubClass</h4>
         <div class="col-md-12" ng-repeat="subClass in character.characterBase.inventory.subClass">
-
           <div class="media">
             <div class="media-left">
               <img class="media-object inventory-thumbnail" ng-class="{'item-complete': subClass.isGridComplete}"
@@ -39,7 +45,6 @@
               </h5>
             </div>
           </div>
-
           <div collapse="subClass.isCollapsed">
             <div class="well">
               <small>
@@ -49,20 +54,17 @@
               </small>
             </div>
           </div>
-
         </div>
 
         <!--Weapons-->
         <h4 class="col-md-12">Weapons</h4>
         <div class="col-md-12" ng-repeat="weapon in character.characterBase.inventory.weapons">
-
           <div class="media">
             <div class="media-left" >
               <img class="media-object inventory-thumbnail" ng-class="{'item-complete': weapon.isGridComplete}"
                    ng-click="weapon.isCollapsed = !weapon.isCollapsed"
                    ng-src="{{vm.bungie + weapon.itemHashDefinition.icon}}" alt="{{weapon.itemHashDefinition.itemName}}">
             </div>
-
             <div class="media-body">
               <h5 class="media-heading">
                   {{weapon.itemHashDefinition.itemName}}
@@ -72,9 +74,7 @@
                 {{weapon.primaryStat.value}}
               </div>
             </div>
-
           </div>
-
           <div collapse="weapon.isCollapsed">
             <div class="well">
               <div>
@@ -84,7 +84,6 @@
                   </em>
                 </small>
               </div>
-
               <div>
                 <div ng-repeat="stat in weapon.stats">
                   <div>
@@ -104,7 +103,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <!--Armor-->
