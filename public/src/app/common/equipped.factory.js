@@ -48,25 +48,27 @@
         if (bucket === 'BUCKET_BUILD') {
           itemDef = definitionMatch.get(item.items[0], definitions);
         } else {
-          itemDef = build(item.items[0], definitions);
+          if (!_.isUndefined(item.items[0])) {
+            itemDef = build(item.items[0], definitions);
+          }
         }
-        itemDef.bucket = bucket;
-        itemDef.isCollapsed = true;
-        if (bucket === 'BUCKET_BUILD') {
-          equippedItems.subClass.push(itemDef);
-        } else if (_.includes(itemOrderWeapons, bucket)) {
-          equippedItems.weapons.push(itemDef);
-        } else if (_.includes(itemOrderArmor, bucket)) {
-          equippedItems.armor.push(itemDef);
-        } else if (_.includes(itemOrderMisc, bucket)) {
-          equippedItems.misc.push(itemDef);
+
+        if (!_.isEmpty(itemDef)) {
+          itemDef.bucket = bucket;
+          itemDef.isCollapsed = true;
+          if (bucket === 'BUCKET_BUILD') {
+            equippedItems.subClass.push(itemDef);
+          } else if (_.includes(itemOrderWeapons, bucket)) {
+            equippedItems.weapons.push(itemDef);
+          } else if (_.includes(itemOrderArmor, bucket)) {
+            equippedItems.armor.push(itemDef);
+          } else if (_.includes(itemOrderMisc, bucket)) {
+            equippedItems.misc.push(itemDef);
+          }
         }
+
       });
 
-
-      //equippedItems = _.sortBy(equippedItems, function(item) {
-      //  return itemOrder.indexOf(item.bucket);
-      //});
       return equippedItems;
     }
 
@@ -75,10 +77,13 @@
       item.perks.forEach(function(perk) {
         perk = definitionMatch.get(perk, definitions);
       });
+
       item.stats.forEach(function(stat) {
         stat = definitionMatch.get(stat, definitions);
       });
+
       item.primaryStat = definitionMatch.get(item.primaryStat, definitions);
+
       return item;
     }
 

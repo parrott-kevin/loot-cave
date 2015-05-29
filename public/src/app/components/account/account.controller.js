@@ -19,7 +19,7 @@
       character.characterBase.inventory = equipped.get(equipment, definitions);
     });
 
-    console.log(vm.account);
+    //console.log(vm.account);
     console.log(vm.characters);
 
   }
