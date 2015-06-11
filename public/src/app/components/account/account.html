@@ -24,7 +24,6 @@
           </div>
         </div>
       </div>
-
       <!--Inventory-->
       <div class="row">
         <!--SubClass-->
@@ -60,7 +59,7 @@
           <div class="media">
             <div class="media-left" >
               <img class="media-object inventory-thumbnail" ng-class="{'item-complete': weapon.isGridComplete}"
-                   ng-click="weapon.isCollapsed = !weapon.isCollapsed"
+                   ng-click="vm.itemClick(weapon);"
                    ng-src="{{vm.bungie + weapon.itemHashDefinition.icon}}" alt="{{weapon.itemHashDefinition.itemName}}">
             </div>
             <div class="media-body">
@@ -97,6 +96,18 @@
                         <em>{{stat.value}}</em>
                       </progressbar>
                     </span>
+                </div>
+              </div>
+              <div>
+                <div ng-repeat="perk in weapon.perks">
+                  <div ng-if="perk.isActive">
+                    <img ng-src="{{vm.bungie + perk.iconPath}}">
+                    <strong>{{perk.perkHashDefinition.displayName}}</strong>
+                  </div>
+                  <div ng-if="!perk.isActive">
+                    <img ng-src="{{vm.bungie + perk.iconPath}}">
+                    <span style="color: lightgrey;">{{perk.perkHashDefinition.displayName}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,6 +149,18 @@
                     {{armor.itemHashDefinition.itemDescription}}
                   </em>
                 </small>
+              </div>
+              <div>
+                <div ng-repeat="perk in armor.perks">
+                  <div ng-if="perk.isActive">
+                    <img ng-src="{{vm.bungie + perk.iconPath}}">
+                    <strong>{{perk.perkHashDefinition.displayName}}</strong>
+                  </div>
+                  <div ng-if="!perk.isActive">
+                    <img ng-src="{{vm.bungie + perk.iconPath}}">
+                    <span style="color: lightgrey;">{{perk.perkHashDefinition.displayName}}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

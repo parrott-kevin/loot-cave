@@ -5,8 +5,8 @@
     .module('account.controller', ['ui.bootstrap'])
     .controller('AccountController', AccountController);
 
-  AccountController.$inject = ['accountResolver', 'equipped', 'definitionMatch', '_'];
-  function AccountController(accountResolver, equipped, definitionMatch, _) {
+  AccountController.$inject = ['accountResolver', 'equipped', 'definitionMatch', 'talentGrid', '_'];
+  function AccountController(accountResolver, equipped, definitionMatch, talentGrid, _) {
     var vm = this;
     vm.account = _.omit(accountResolver.data, 'characters');
     vm.account.inventory.currencies[0] = definitionMatch.get(vm.account.inventory.currencies[0], accountResolver.definitions);
@@ -19,8 +19,14 @@
       character.characterBase.inventory = equipped.get(equipment, definitions);
     });
 
+    vm.itemClick = function(weapon) {
+      weapon.isCollapsed = !weapon.isCollapsed;
+      talentGrid.get(weapon.nodes, weapon.talentGridHashDefinition);
+    };
+    vm.talent = talentGrid.get;
+    console.log(accountResolver);
     //console.log(vm.account);
-    console.log(vm.characters);
+    //console.log(vm.characters);
 
   }
 })();
