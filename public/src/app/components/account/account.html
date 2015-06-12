@@ -99,16 +99,7 @@
                 </div>
               </div>
               <div>
-                <div ng-repeat="perk in weapon.perks">
-                  <div ng-if="perk.isActive">
-                    <img ng-src="{{vm.bungie + perk.iconPath}}">
-                    <strong>{{perk.perkHashDefinition.displayName}}</strong>
-                  </div>
-                  <div ng-if="!perk.isActive">
-                    <img ng-src="{{vm.bungie + perk.iconPath}}">
-                    <span style="color: lightgrey;">{{perk.perkHashDefinition.displayName}}</span>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

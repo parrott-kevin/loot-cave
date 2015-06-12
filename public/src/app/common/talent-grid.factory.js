@@ -13,9 +13,15 @@
 
     function get(nodes, grid) {
       var gridLayout = grid.nodes.map(function(i) {
-        return [i.column, i.row];
+        return {
+          active: _.findWhere(nodes, {'nodeHash': i.nodeHash}).isActivated,
+          column: i.column,
+          row: i.row,
+          icon: i.steps[0].icon
+        };
       });
-      console.log(gridLayout);
+      gridLayout = _.sortByOrder(gridLayout, ['column', 'row'], [true, true]);
+      return gridLayout;
 
     }
   }
