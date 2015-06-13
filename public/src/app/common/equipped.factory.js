@@ -5,8 +5,8 @@
     .module('equipped.factory', [])
     .factory('equipped', equipped);
 
-  equipped.$inject = ['definitionMatch', '_'];
-  function equipped(definitionMatch, _) {
+  equipped.$inject = ['definitionMatch', 'talentGrid', '_'];
+  function equipped(definitionMatch, talentGrid, _) {
     return {
       get: get
     };
@@ -81,7 +81,9 @@
       item.stats.forEach(function(stat) {
         stat = definitionMatch.get(stat, definitions);
       });
-
+      if (!_.isUndefined(item.talentGridHashDefinition)) {
+        item.talentGridLayout = talentGrid.get(item.nodes, item.talentGridHashDefinition);
+      }
       item.primaryStat = definitionMatch.get(item.primaryStat, definitions);
 
       return item;

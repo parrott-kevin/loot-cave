@@ -21,10 +21,9 @@
 
     vm.itemClick = function(weapon) {
       weapon.isCollapsed = !weapon.isCollapsed;
-      if (!weapon.isCollapsed) {
-        weapon.talentGrid = talentGrid.get(weapon.nodes, weapon.talentGridHashDefinition);
-        //console.log(weapon.talentGrid);
-      }
+      //if (!weapon.isCollapsed) {
+      //  weapon.talentGrid = talentGrid.get(weapon.nodes, weapon.talentGridHashDefinition);
+      //}
 
     };
     console.log(accountResolver);

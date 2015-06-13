@@ -74,18 +74,19 @@
           </div>
           <div collapse="weapon.isCollapsed">
             <div class="well">
-              <div>
+              <div class="row">
                 <small>
                   <em>
                     {{weapon.itemHashDefinition.itemDescription}}
                   </em>
                 </small>
               </div>
-              <div>
+              <div class="row">
                 <div ng-repeat="stat in weapon.stats">
                   <div>
                     {{stat.statHashDefinition.statName}}
                   </div>
+                  <div>
                     <span ng-if="stat.statHashDefinition.statName === 'Magazine'">
                       <progressbar value="stat.value" max="stat.value">
                         <em>{{stat.value}}</em>
@@ -96,10 +97,24 @@
                         <em>{{stat.value}}</em>
                       </progressbar>
                     </span>
+                  </div>
                 </div>
               </div>
-              <div>
-
+              <div class="row">
+                <table>
+                  <tr ng-repeat="column in weapon.talentGridLayout">
+                    <td ng-repeat="node in column">
+                      <span tooltip="{{node.name}}: {{node.description}}">
+                        <span ng-if="node.active">
+                          <img style="height: 50%; width: 50%; background-color: #5cb85c;" ng-src="{{vm.bungie + node.icon}}">
+                        </span>
+                        <span ng-if="!node.active">
+                          <img style="height: 50%; width: 50%;" ng-src="{{vm.bungie + node.icon}}">
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -134,24 +149,28 @@
           </div>
           <div collapse="armor.isCollapsed">
             <div class="well">
-              <div>
+              <div class="row">
                 <small>
                   <em>
                     {{armor.itemHashDefinition.itemDescription}}
                   </em>
                 </small>
               </div>
-              <div>
-                <div ng-repeat="perk in armor.perks">
-                  <div ng-if="perk.isActive">
-                    <img ng-src="{{vm.bungie + perk.iconPath}}">
-                    <strong>{{perk.perkHashDefinition.displayName}}</strong>
-                  </div>
-                  <div ng-if="!perk.isActive">
-                    <img ng-src="{{vm.bungie + perk.iconPath}}">
-                    <span style="color: lightgrey;">{{perk.perkHashDefinition.displayName}}</span>
-                  </div>
-                </div>
+              <div class="row">
+                <table>
+                  <tr ng-repeat="column in armor.talentGridLayout">
+                    <td ng-repeat="node in column">
+                      <span tooltip="{{node.name}}: {{node.description}}">
+                        <span ng-if="node.active">
+                          <img style="height: 50%; width: 50%; background-color: #5cb85c;" ng-src="{{vm.bungie + node.icon}}">
+                        </span>
+                        <span ng-if="!node.active">
+                          <img style="height: 50%; width: 50%;" ng-src="{{vm.bungie + node.icon}}">
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
