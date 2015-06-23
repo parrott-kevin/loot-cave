@@ -11,16 +11,18 @@
       get: get
     };
 
-    function get(nodes, grid) {
-      var gridLayout = grid.nodes.map(function(node) {
-        if (node.steps[0].icon !== '/img/misc/missing_icon.png' && node.column >= 0) {
+    function get(nodes, talentGridDefinition) {
+      var gridLayout = talentGridDefinition.nodes.map(function(talentGridNode) {
+        var node = _.findWhere(nodes, {'nodeHash': talentGridNode.nodeHash});
+        var step = _.findWhere(talentGridNode.steps, {'stepIndex': node.stepIndex});
+        if (step.icon !== '/img/misc/missing_icon.png' && talentGridNode.column >= 0) {
           return {
-            active: _.findWhere(nodes, {'nodeHash': node.nodeHash}).isActivated,
-            column: node.column,
-            row: node.row,
-            icon: node.steps[0].icon,
-            name: node.steps[0].nodeStepName,
-            description: node.steps[0].nodeStepDescription
+            active: node.isActivated,
+            column: talentGridNode.column,
+            row: talentGridNode.row,
+            icon: step.icon,
+            name: step.nodeStepName,
+            description: step.nodeStepDescription
           };
         } else {
           return {};
@@ -31,7 +33,7 @@
 
       var columnSpread = _.max(gridLayout, 'column').column - _.min(gridLayout, 'column').column;
       var result = [];
-      for (var i = 0; i < columnSpread; i++) {
+      for (var i = 0; i <= columnSpread; i++) {
         result.push(_.filter(gridLayout, {'column': gridLayout[0].column}));
         gridLayout = _.reject(gridLayout, {'column': gridLayout[0].column});
       }

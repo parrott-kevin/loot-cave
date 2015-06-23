@@ -43,7 +43,7 @@
             </div>
           </div>
           <div collapse="subClass.isCollapsed">
-            <div class="well">
+            <div class="node-well">
               <small>
                 <em>
                   {{subClass.itemHashDefinition.itemDescription}}
@@ -73,7 +73,7 @@
             </div>
           </div>
           <div collapse="weapon.isCollapsed">
-            <div class="well">
+            <div class="node-well">
               <div class="row">
                 <small>
                   <em>
@@ -106,7 +106,7 @@
                     <td ng-repeat="node in column">
                       <span tooltip="{{node.name}}: {{node.description}}">
                         <span ng-if="node.active">
-                          <img style="height: 50%; width: 50%; background-color: #5cb85c;" ng-src="{{vm.bungie + node.icon}}">
+                          <img class="node-active" ng-src="{{vm.bungie + node.icon}}">
                         </span>
                         <span ng-if="!node.active">
                           <img style="height: 50%; width: 50%;" ng-src="{{vm.bungie + node.icon}}">
@@ -148,7 +148,7 @@
             </div>
           </div>
           <div collapse="armor.isCollapsed">
-            <div class="well">
+            <div class="node-well">
               <div class="row">
                 <small>
                   <em>
@@ -162,7 +162,7 @@
                     <td ng-repeat="node in column">
                       <span tooltip="{{node.name}}: {{node.description}}">
                         <span ng-if="node.active">
-                          <img style="height: 50%; width: 50%; background-color: #5cb85c;" ng-src="{{vm.bungie + node.icon}}">
+                          <img class="node-active" ng-src="{{vm.bungie + node.icon}}">
                         </span>
                         <span ng-if="!node.active">
                           <img style="height: 50%; width: 50%;" ng-src="{{vm.bungie + node.icon}}">
