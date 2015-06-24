@@ -27,28 +27,33 @@
       <!--Inventory-->
       <div class="row">
         <!--SubClass-->
-        <h4 class="col-md-12">SubClass</h4>
-        <div class="col-md-12" ng-repeat="subClass in character.characterBase.inventory.subClass">
-          <div class="media">
-            <div class="media-left">
-              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': subClass.isGridComplete}"
-                   ng-click="subClass.isCollapsed = !subClass.isCollapsed"
-                   ng-src="{{vm.bungie + subClass.itemHashDefinition.icon}}" alt="{{subClass.itemHashDefinition.itemName}}">
-            </div>
-
-            <div class="media-body">
-              <h5 class="media-heading">
-                {{subClass.itemHashDefinition.itemName}}
-              </h5>
-            </div>
+        <div class="col-md-12">
+          <div class="row">
+            <h4 class="col-md-12">SubClass</h4>
           </div>
-          <div collapse="subClass.isCollapsed">
-            <div class="node-well">
-              <small>
-                <em>
-                  {{subClass.itemHashDefinition.itemDescription}}
-                </em>
-              </small>
+          <div class="row" ng-repeat="subClass in character.characterBase.inventory.subClass">
+            <div class=" col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  {{subClass.itemHashDefinition.itemName}}
+                </div>
+                <div class="panel-body">
+                  <div>
+                    <img class="inventory-thumbnail" ng-class="{'item-complete': subClass.isGridComplete}"
+                         ng-click="subClass.isCollapsed = !subClass.isCollapsed"
+                         ng-src="{{vm.bungie + subClass.itemHashDefinition.icon}}" alt="{{subClass.itemHashDefinition.itemName}}">
+                  </div>
+                </div>
+                <div collapse="subClass.isCollapsed">
+                  <div class="node-well">
+                    <small>
+                      <em>
+                        {{subClass.itemHashDefinition.itemDescription}}
+                      </em>
+                    </small>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +106,7 @@
                 </div>
               </div>
               <div class="row">
-                <table>
+                <table class="table">
                   <tr ng-repeat="column in weapon.talentGridLayout">
                     <td ng-repeat="node in column">
                       <span tooltip="{{node.name}}: {{node.description}}">
