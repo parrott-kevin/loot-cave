@@ -41,6 +41,12 @@
         'BUCKET_EMBLEM'
       ];
 
+      var bucketPretty = {
+        'BUCKET_PRIMARY_WEAPON': 'Primary Weapon',
+        'BUCKET_SPECIAL_WEAPON': 'Special Weapon',
+        'BUCKET_HEAVY_WEAPON': 'Heavy Weapon'
+      };
+
       items.forEach(function(item) {
         item = definitionMatch.get(item, definitions);
         var bucket = item.bucketHashDefinition.bucketIdentifier;
@@ -55,6 +61,7 @@
 
         if (!_.isEmpty(itemDef)) {
           itemDef.bucket = bucket;
+          itemDef.bucketPretty = bucketPretty[bucket];
           itemDef.isCollapsed = true;
           if (bucket === 'BUCKET_BUILD') {
             equippedItems.subClass.push(itemDef);

@@ -25,27 +25,21 @@
         </div>
       </div>
       <!--Inventory-->
-      <div class="row">
+      <div class="row buffer-top-15">
         <!--SubClass-->
         <div class="col-md-12">
-          <div class="row">
-            <h4 class="col-md-12">SubClass</h4>
-          </div>
           <div class="row" ng-repeat="subClass in character.characterBase.inventory.subClass">
-            <div class=" col-md-12">
+            <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  {{subClass.itemHashDefinition.itemName}}
+                  SubClass - {{subClass.itemHashDefinition.itemName}}
                 </div>
                 <div class="panel-body">
-                  <div>
-                    <img class="inventory-thumbnail" ng-class="{'item-complete': subClass.isGridComplete}"
-                         ng-click="subClass.isCollapsed = !subClass.isCollapsed"
+                  <div class="col-md-4">
+                    <img class="thumbnail-inventory" ng-class="{'item-complete': subClass.isGridComplete}"
                          ng-src="{{vm.bungie + subClass.itemHashDefinition.icon}}" alt="{{subClass.itemHashDefinition.itemName}}">
                   </div>
-                </div>
-                <div collapse="subClass.isCollapsed">
-                  <div class="node-well">
+                  <div class="col-md-8">
                     <small>
                       <em>
                         {{subClass.itemHashDefinition.itemDescription}}
@@ -59,11 +53,96 @@
         </div>
 
         <!--Weapons-->
+        <div class="col-md-12">
+          <div class="row" ng-repeat="weapon in character.characterBase.inventory.weapons">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  {{weapon.bucketPretty}} - {{weapon.itemHashDefinition.itemName}}
+                </div>
+                <div class="panel-body buffer-bottom-0">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <img class="inventory-thumbnail" ng-class="{'item-complete': weapon.isGridComplete}"
+                           ng-click="vm.itemClick(weapon)"
+                           ng-src="{{vm.bungie + weapon.itemHashDefinition.icon}}" alt="{{weapon.itemHashDefinition.itemName}}">
+                    </div>
+                    <div class="col-md-7">
+                      <div class="row">
+                        <em>{{weapon.primaryStat.statHashDefinition.statName}}: {{weapon.primaryStat.value}}</em>
+                      </div>
+                      <div class="row">
+                        <small><em>{{weapon.itemHashDefinition.itemDescription}}</em></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row buffer-top-15">
+                    <accordion class="col-md-12" close-others="false">
+                      <accordion-group>
+                        <accordion-heading>
+                          Stats
+                        </accordion-heading>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div ng-repeat="stat in weapon.stats">
+                              <div>
+                                {{stat.statHashDefinition.statName}}
+                              </div>
+                              <div>
+                                <span ng-if="stat.statHashDefinition.statName === 'Magazine'">
+                                  <progressbar value="stat.value" max="stat.value">
+                                    <em>{{stat.value}}</em>
+                                  </progressbar>
+                                </span>
+                                <span ng-if="stat.statHashDefinition.statName !== 'Magazine'">
+                                  <progressbar value="stat.value">
+                                    <em>{{stat.value}}</em>
+                                  </progressbar>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </accordion-group>
+                      <accordion-group>
+                        <accordion-heading>
+                          Talents
+                        </accordion-heading>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <table class="table">
+                              <tr ng-repeat="column in weapon.talentGridLayout">
+                                <td ng-repeat="node in column">
+                                <span tooltip="{{node.name}}: {{node.description}}">
+                                  <span ng-if="node.active">
+                                    <img class="node-active" ng-src="{{vm.bungie + node.icon}}">
+                                  </span>
+                                  <span ng-if="!node.active">
+                                    <img style="height: 50%; width: 50%;" ng-src="{{vm.bungie + node.icon}}">
+                                  </span>
+                                </span>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </accordion-group>
+                    </accordion>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <h4 class="col-md-12">Weapons</h4>
         <div class="col-md-12" ng-repeat="weapon in character.characterBase.inventory.weapons">
           <div class="media">
             <div class="media-left" >
-              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': weapon.isGridComplete}"
+              <img class="media-object thumbnail-inventory" ng-class="{'item-complete': weapon.isGridComplete}"
                    ng-click="vm.itemClick(weapon);"
                    ng-src="{{vm.bungie + weapon.itemHashDefinition.icon}}" alt="{{weapon.itemHashDefinition.itemName}}">
             </div>
@@ -130,7 +209,7 @@
         <div class="col-md-12" ng-repeat="armor in character.characterBase.inventory.armor">
           <div class="media">
             <div class="media-left">
-              <img class="media-object inventory-thumbnail" ng-class="{'item-complete': armor.isGridComplete}"
+              <img class="media-object thumbnail-inventory" ng-class="{'item-complete': armor.isGridComplete}"
                    ng-click="armor.isCollapsed = !armor.isCollapsed"
                    ng-src="{{vm.bungie + armor.itemHashDefinition.icon}}" alt="{{armor.itemHashDefinition.itemName}}">
             </div>
@@ -184,7 +263,7 @@
         <!--Misc-->
         <h4 class="col-md-12">Misc</h4>
         <div class="col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
-          <img class="inventory-thumbnail img-responsive" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
+          <img class="thumbnail-inventory img-responsive" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
           <div>
             {{item.itemHashDefinition.itemName}}
           </div>
