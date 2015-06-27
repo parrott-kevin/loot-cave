@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-5 col-xs-5">
+    <img class="inventory-thumbnail" ng-class="{'item-complete': item.isGridComplete}"
+         ng-src="{{bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
+  </div>
+  <div class="col-md-7 col-xs-7">
+    <div class="row">
+      <em>{{item.primaryStat.statHashDefinition.statName}}: {{item.primaryStat.value}}</em>
+    </div>
+    <div class="row">
+      <small><em>{{item.itemHashDefinition.itemDescription}}</em></small>
+    </div>
+  </div>
+</div>

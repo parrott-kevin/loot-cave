@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{item.bucketPretty}} - {{item.itemHashDefinition.itemName}}
+  </div>
+  <div class="panel-body buffer-bottom-0">
+    <armor-main item="item" bungie="bungie"></armor-main>
+
+    <div class="row buffer-top-15">
+      <accordion class="col-md-12" close-others="false">
+        <stats item="item"></stats>
+        <talents item="item" bungie="bungie"></talents>
+      </accordion>
+    </div>
+  </div>
+</div>

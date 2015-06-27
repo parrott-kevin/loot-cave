@@ -10,6 +10,12 @@
       'fetch-account.factory',
       'definition-match.factory',
       'equipped.factory',
-      'talent-grid.factory'
+      'talent-grid.factory',
+      'talents.directive',
+      'stats.directive',
+      'weapon-main.directive',
+      'weapon.directive',
+      'armor-main.directive',
+      'armor.directive'
     ]);
 })();
