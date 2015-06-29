@@ -1,0 +1,18 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{item.bucketPretty}} - {{item.itemHashDefinition.itemName}}
+    </div>
+    <div class="panel-body buffer-bottom-0">
+      <item-main-panel item="item" bungie="bungie" type="type"></item-main-panel>
+
+      <div class="row buffer-top-15" ng-if="type !== 'subClass'">
+        <accordion class="col-md-12" close-others="false">
+          <stats item="item"></stats>
+          <talents item="item" bungie="bungie"></talents>
+        </accordion>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -19,13 +19,6 @@
       character.characterBase.inventory = equipped.get(equipment, definitions);
     });
 
-    vm.itemClick = function(weapon) {
-      weapon.isCollapsed = !weapon.isCollapsed;
-      //if (!weapon.isCollapsed) {
-      //  weapon.talentGrid = talentGrid.get(weapon.nodes, weapon.talentGridHashDefinition);
-      //}
-
-    };
     console.log(accountResolver);
     //console.log(vm.account);
     //console.log(vm.characters);

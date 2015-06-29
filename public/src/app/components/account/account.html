@@ -28,45 +28,22 @@
       <div class="row buffer-top-15">
         <!--SubClass-->
         <div class="col-md-12">
-          <div class="row" ng-repeat="subClass in character.characterBase.inventory.subClass">
-            <div class="col-md-12">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  SubClass - {{subClass.itemHashDefinition.itemName}}
-                </div>
-                <div class="panel-body">
-                  <div class="col-md-4">
-                    <img class="thumbnail-inventory" ng-class="{'item-complete': subClass.isGridComplete}"
-                         ng-src="{{vm.bungie + subClass.itemHashDefinition.icon}}" alt="{{subClass.itemHashDefinition.itemName}}">
-                  </div>
-                  <div class="col-md-8">
-                    <small>
-                      <em>
-                        {{subClass.itemHashDefinition.itemDescription}}
-                      </em>
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="row" ng-repeat="item in character.characterBase.inventory.subClass">
+            <item-display item="item" bungie="vm.bungie" type="'subClass'"></item-display>
           </div>
         </div>
 
         <!--Weapons-->
         <div class="col-md-12">
           <div class="row" ng-repeat="item in character.characterBase.inventory.weapons">
-            <div class="col-md-12">
-              <weapon item="item" bungie="vm.bungie"></weapon>
-            </div>
+            <item-display item="item" bungie="vm.bungie" type="weapon"></item-display>
           </div>
         </div>
 
         <!--Armor-->
         <div class="col-md-12">
           <div class="row" ng-repeat="item in character.characterBase.inventory.armor">
-            <div class="col-md-12">
-              <armor item="item" bungie="vm.bungie"></armor>
-            </div>
+            <item-display item="item" bungie="vm.bungie" type="armor"></item-display>
           </div>
         </div>
 
