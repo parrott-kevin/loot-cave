@@ -42,13 +42,14 @@
       ];
 
       var bucketPretty = {
+        'BUCKET_BUILD': 'SubClass',
         'BUCKET_PRIMARY_WEAPON': 'Primary Weapon',
         'BUCKET_SPECIAL_WEAPON': 'Special Weapon',
         'BUCKET_HEAVY_WEAPON': 'Heavy Weapon',
         'BUCKET_HEAD': 'Head',
         'BUCKET_ARMS': 'Arms',
         'BUCKET_CHEST': 'Chest',
-        'BUCKET_LEGS': 'Legs'
+        'BUCKET_LEGS': 'Legs',
       };
 
       items.forEach(function(item) {
