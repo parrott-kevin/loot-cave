@@ -49,7 +49,7 @@
         'BUCKET_HEAD': 'Head',
         'BUCKET_ARMS': 'Arms',
         'BUCKET_CHEST': 'Chest',
-        'BUCKET_LEGS': 'Legs',
+        'BUCKET_LEGS': 'Legs'
       };
 
       items.forEach(function(item) {
