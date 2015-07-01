@@ -1,6 +1,11 @@
 <div class="container">
   <div class="row">
+    <div class="col-xs-6 col-md-2">
       {{vm.account.inventory.currencies[0].itemHashDefinition.itemName}}: {{vm.account.inventory.currencies[0].value}}
+    </div>
+    <div class="col-xs-6 col-md-2 pull-right">
+      Grimoire: {{vm.account.grimoireScore}}
+    </div>
   </div>
   <div class="row">
     <div class="col-md-4" ng-repeat="character in vm.characters">
@@ -49,7 +54,7 @@
 
         <!--Misc-->
         <h4 class="col-md-12">Misc</h4>
-        <div class="col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
+        <div class="col-xs-6 col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
           <img class="thumbnail-inventory img-responsive" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
           <div>
             {{item.itemHashDefinition.itemName}}
