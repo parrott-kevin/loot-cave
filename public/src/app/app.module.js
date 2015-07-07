@@ -15,6 +15,7 @@
       'item-stats.directive',
       'item-display.directive',
       'item-main-panel.directive',
-      'character-header.directive'
+      'character-header.directive',
+      'character-stats.directive'
     ]);
 })();

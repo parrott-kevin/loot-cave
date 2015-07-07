@@ -11,6 +11,7 @@
     <div class="col-md-4" ng-repeat="character in vm.characters">
       <!--Character Headers-->
       <character-header character="character" bungie="vm.bungie"></character-header>
+      <character-stats stats="character.characterBase.stats"></character-stats>
 
       <!--Inventory-->
       <div class="row buffer-top-15">
