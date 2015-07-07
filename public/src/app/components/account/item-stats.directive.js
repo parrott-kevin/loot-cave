@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('stats.directive', [])
-    .directive('stats', stats);
+    .module('item-stats.directive', [])
+    .directive('item-stats', itemStats);
 
-  function stats() {
+  function itemStats() {
     return {
-      templateUrl: './app/components/account/stats.directive.html',
+      templateUrl: './app/components/account/item-stats.directive.html',
       restrict: 'EA',
       scope: {
         item: '='

@@ -12,7 +12,7 @@
       'equipped.factory',
       'talent-grid.factory',
       'talents.directive',
-      'stats.directive',
+      'item-stats.directive',
       'item-display.directive',
       'item-main-panel.directive',
       'character-header.directive'
