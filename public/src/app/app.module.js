@@ -14,6 +14,7 @@
       'talents.directive',
       'stats.directive',
       'item-display.directive',
-      'item-main-panel.directive'
+      'item-main-panel.directive',
+      'character-header.directive'
     ]);
 })();

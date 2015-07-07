@@ -7,13 +7,11 @@
       <table class="table">
         <tr ng-repeat="column in item.talentGridLayout">
           <td ng-repeat="node in column">
-            <span tooltip="{{node.name}}: {{node.description}}">
-              <span ng-if="node.active">
-                <img class="img-rounded node-active" ng-src="{{bungie + node.icon}}">
-              </span>
-              <span ng-if="!node.active">
-                <img class="img-rounded node-inactive"  ng-src="{{bungie + node.icon}}">
-              </span>
+            <span ng-if="node.active">
+              <img class="img-rounded node-active" ng-src="{{bungie + node.icon}}" tooltip="{{node.name}}: {{node.description}}">
+            </span>
+            <span ng-if="!node.active">
+              <img class="img-rounded node-inactive"  ng-src="{{bungie + node.icon}}" tooltip="{{node.name}}: {{node.description}}">
             </span>
           </td>
         </tr>

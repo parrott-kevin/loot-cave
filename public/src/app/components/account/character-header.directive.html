@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12" style="background: url({{bungie + character.backgroundPath}}) transparent no-repeat;">
+    <div class="row">
+      <div class="col-xs-3 col-md-5">
+        <img class="img-responsive" ng-src="{{bungie + character.emblemPath}}">
+      </div>
+      <div class="col-xs-9 col-md-7">
+        <div class="row">
+          <div class="col-xs-3 col-md-3 text-right">
+            <h2 style="color: white;">{{character.characterLevel}}</h2>
+          </div>
+          <div class="col-xs-9 col-md-9">
+            <row>
+              <h2 style="color: white;">{{character.characterBase.classHashDefinition.className}}</h2>
+            </row>
+            <row>
+              <span style="color: white;">
+                <small><em>{{character.characterBase.genderHashDefinition.genderName}} // {{character.characterBase.raceHashDefinition.raceName}}</em></small>
+              </span>
+            </row>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      Defense: {{character.characterBase.stats.STAT_DEFENSE.value}}
+    </div>
+  </div>
+</div>

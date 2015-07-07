@@ -10,32 +10,7 @@
   <div class="row">
     <div class="col-md-4" ng-repeat="character in vm.characters">
       <!--Character Headers-->
-      <div class="row">
-        <div class="col-md-12" style="background: url({{vm.bungie + character.backgroundPath}}) transparent no-repeat;">
-          <div class="row">
-            <div class="col-xs-3 col-md-5">
-              <img class="img-responsive" ng-src="{{vm.bungie + character.emblemPath}}">
-            </div>
-            <div class="col-xs-9 col-md-7">
-              <div class="row">
-                <div class="col-xs-3 col-md-3 text-right">
-                  <h2 style="color: white;">{{character.characterLevel}}</h2>
-                </div>
-                <div class="col-xs-9 col-md-9">
-                  <row>
-                    <h2 style="color: white;">{{character.characterBase.classHashDefinition.className}}</h2>
-                  </row>
-                  <row>
-                    <span style="color: white;">
-                      <small><em>{{character.characterBase.genderHashDefinition.genderName}} // {{character.characterBase.raceHashDefinition.raceName}}</em></small>
-                    </span>
-                  </row>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <character-header character="character" bungie="vm.bungie"></character-header>
 
       <!--Inventory-->
       <div class="row buffer-top-15">
@@ -61,13 +36,17 @@
         </div>
 
         <!--Misc-->
-        <h4 class="col-md-12">Misc</h4>
-        <div class="col-xs-6 col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
-          <img class="thumbnail-inventory img-responsive" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
-          <div>
-            {{item.itemHashDefinition.itemName}}
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="col-xs-4 col-md-4" ng-repeat="item in character.characterBase.inventory.misc">
+                <img tooltip="{{item.itemHashDefinition.itemName}}" class="thumbnail-inventory" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
+              </div>
+            </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>
