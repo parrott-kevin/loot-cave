@@ -12,10 +12,10 @@
       'equipped.factory',
       'talent-grid.factory',
       'talents.directive',
-      'item-stats.directive',
+      'stats.directive',
       'item-display.directive',
       'item-main-panel.directive',
       'character-header.directive',
-      'character-stats.directive'
+      'error.controller'
     ]);
 })();

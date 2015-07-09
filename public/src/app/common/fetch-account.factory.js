@@ -18,8 +18,10 @@
           platform: platform,
           name: name
         }
-      }).success(function(data) {
-        return data;
+      }).success(function(data, status) {
+        return {data: data, status: status};
+      }).error(function(data, status) {
+        return {data: data, status: status};
       });
     }
   }

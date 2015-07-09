@@ -20,13 +20,11 @@ var account = {
         };
         request(options, function(error, response, body) {
           body = JSON.parse(body);
-          if (body.ErrorCode === 1 && response.statusCode === 200 && !_.isUndefined(body.Response[0])) {
+          if (body.ErrorCode === 1 && response.statusCode === 200 && !_.isUndefined(body.Response)) {
             var membershipId = body.Response[0].membershipId;
             callback(null, membershipId);
-          } else if (_.isUndefined(body.Response[0])) {
-            res.status('404').send();
           } else {
-            res.send([response, body.ErrorCode, body.Message]);
+            res.status('404').send();
           }
         });
       },

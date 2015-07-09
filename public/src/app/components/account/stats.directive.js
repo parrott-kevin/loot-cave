@@ -2,19 +2,19 @@
   'use strict';
 
   angular
-    .module('item-stats.directive', [])
-    .directive('item-stats', itemStats);
+    .module('stats.directive', [])
+    .directive('stats', itemStats);
 
   function itemStats() {
     return {
-      templateUrl: './app/components/account/item-stats.directive.html',
+      templateUrl: './app/components/account/stats.directive.html',
       restrict: 'EA',
       scope: {
         item: '='
       }
       //,
       //link: function(scope, elem, attrs) {
-      //  console.log(scope.bungie);
+      //  console.log(scope.item);
       //}
 
     };

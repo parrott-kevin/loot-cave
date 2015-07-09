@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <div ng-repeat="stat in item.stats">
+      <span ng-if="stat.value !== 0">
+        <div>
+          {{stat.statHashDefinition.statName}}
+        </div>
+        <div>
+          <span ng-if="stat.statHashDefinition.statName === 'Magazine'">
+            <progressbar value="stat.value" max="stat.value">
+              <em>{{stat.value}}</em>
+            </progressbar>
+          </span>
+          <span ng-if="stat.statHashDefinition.statName !== 'Magazine'">
+            <progressbar value="stat.value">
+              <em>{{stat.value}}</em>
+            </progressbar>
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

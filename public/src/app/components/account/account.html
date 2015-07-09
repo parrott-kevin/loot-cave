@@ -40,14 +40,12 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div class="col-xs-4 col-md-4" ng-repeat="item in character.characterBase.inventory.misc">
-                <img tooltip="{{item.itemHashDefinition.itemName}}" class="thumbnail-inventory" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
+              <div class="col-xs-6 col-md-6" ng-repeat="item in character.characterBase.inventory.misc">
+                <img tooltip="{{item.itemHashDefinition.itemName}}" class="thumbnail-inventory center-block" ng-src="{{vm.bungie + item.itemHashDefinition.icon}}" alt="{{item.itemHashDefinition.itemName}}">
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>

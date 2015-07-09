@@ -26,17 +26,25 @@
           accountResolver: accountResolver
         }
       })
+      .when('/error', {
+        templateUrl: 'app/components/error/error.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirect: '/home'
       });
   }
 
-  accountResolver.$inject = ['$route', 'fetchAccount'];
-  function accountResolver($route, fetchAccount) {
+  accountResolver.$inject = ['$location', '$route', 'fetchAccount'];
+  function accountResolver($location, $route, fetchAccount) {
     var platform = $route.current.params.platform;
     var name = $route.current.params.name;
     return fetchAccount.get(platform, name).then(function (d) {
       return d.data;
+    }, function(error) {
+      console.log(error);
+      $location.url('/error');
     });
   }
 })();
